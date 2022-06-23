@@ -10,7 +10,11 @@ func ConfigRoutes(rounter *gin.Engine) *gin.Engine {
 	{
 		books := main.Group("books")
 		{
-			books.GET("/", controllers.ShowBook)
+			books.GET("/", controllers.ShowBooks)
+			books.GET("/:id", controllers.ShowBook)
+			books.POST("/", controllers.CreateBook)
+			books.PUT("/", controllers.EditeBook)
+			books.DELETE("/:id", controllers.DeleteBook)
 		}
 	}
 
