@@ -5,8 +5,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ConfigRoutes(rounter *gin.Engine) *gin.Engine {
-	main := rounter.Group("api/v1")
+func ConfigRoutes(router *gin.Engine) *gin.Engine {
+	main := router.Group("api/v1")
 	{
 		books := main.Group("books")
 		{
@@ -18,5 +18,5 @@ func ConfigRoutes(rounter *gin.Engine) *gin.Engine {
 		}
 	}
 
-	return rounter
+	return router
 }

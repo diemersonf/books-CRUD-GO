@@ -7,6 +7,21 @@ import (
 	"strconv"
 )
 
+func ShowBooks(c *gin.Context) {
+	db := database.GetDataBase()
+
+	var books []models.Book
+	err := db.Find(&books).Error
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": "cannot list book " + err.Error(),
+		})
+		return
+	}
+
+	c.JSON(200, books)
+}
+
 func ShowBook(c *gin.Context) {
 	id := c.Param("id")
 	newid, err := strconv.Atoi(id)
@@ -53,21 +68,6 @@ func CreateBook(c *gin.Context) {
 	}
 
 	c.JSON(201, book)
-}
-
-func ShowBooks(c *gin.Context) {
-	db := database.GetDataBase()
-
-	var books []models.Book
-	err := db.Find(&books).Error
-	if err != nil {
-		c.JSON(400, gin.H{
-			"error": "cannot create book " + err.Error(),
-		})
-		return
-	}
-
-	c.JSON(200, books)
 }
 
 func EditeBook(c *gin.Context) {
